@@ -135,7 +135,7 @@ variable "ip6" {
 variable "labels" {
   description = "Add metadata to a pod."
   type = list(string)
-  default = null
+  default = []
 }
 
 variable "label_file" {
@@ -158,7 +158,7 @@ variable "name" {
 variable "networks" {
   description = "Set the network mode for the pod. Invalid if using --dns, --dns-opt, or --dns-search with --network that is set to none or container:id."
   type = list(string)
-  default = null
+  default = []
 }
 
 variable "network_alias" {
@@ -170,7 +170,7 @@ variable "network_alias" {
 variable "no_hosts" {
   description = "Disable creation of /etc/hosts for the pod."
   type = bool
-  default = null
+  default = false
 }
 
 variable "pid" {
@@ -186,15 +186,15 @@ variable "pod_id_file" {
 }
 
 variable "publish" {
-  description = "Publish a port or range of ports from the pod to the host."
-  type = string
-  default = null
+  description = "List of ports or ranges of ports to publish from the pod to the host."
+  type = list(string)
+  default = []
 }
 
 variable "replace" {
   description = "If another pod with the same name already exists, replace and remove it."
   type = bool
-  default = null
+  default = true
 }
 variable "security_opt" {
   description = "Security options."
@@ -231,7 +231,7 @@ variable "volumes" {
 }
 
 variable "volumes_from" {
-  description = Mount volumes from the specified container(s).
+  description = "Mount volumes from the specified container(s)."
   type = string
   default = null
 }
