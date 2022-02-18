@@ -77,9 +77,6 @@ data template_file "pod_service" {
       %{~ if var.mac_address != null ~}
       --mac-address ${var.mac_address} \
       %{~ endif ~}
-      %{~ if var.name != null ~}
-      --name ${var.name} \
-      %{~ endif ~}
       %{~ for network in var.networks ~}
       --network ${network} \
       %{~ endfor ~}
@@ -122,6 +119,12 @@ data template_file "pod_service" {
       %{~ if var.volumes_from != null ~}
       --volumes-from ${var.volumes_from} \
       %{~ endif ~}
+      %{~ if var.name != null ~}
+      --name ${var.name}
+      %{~ endif ~}
+    Restart=on-failure
+    RestartSec=30
+
     [Install]
     WantedBy=multi-user.target
     EOS
