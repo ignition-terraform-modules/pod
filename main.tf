@@ -1,13 +1,13 @@
 data template_file "pod_service" {
   template = <<-EOS
     [Unit]
-    Description=${var.name} Setup
+    Description=${var.name} pod create
     After=network.target
 
     [Service]
     User=${var.user}
     Type=oneshot
-    ExecStart=/bin/podman create pod \
+    ExecStart=/bin/podman pod create \
       %{~ for host in var.add_hosts ~}
       --add-host=${host} \
       %{~ endfor ~}
@@ -136,7 +136,7 @@ data template_file "ignition" {
       "systemd": {
         "units": [
           {
-            "name": "${var.name}-pod-setup.service",
+            "name": "${var.name}-pod-create.service",
             "enabled": true,
             "contents": ${jsonencode(data.template_file.pod_service.rendered)}
           }
