@@ -136,7 +136,7 @@ data template_file "ignition" {
       "systemd": {
         "units": [
           {
-            "name": "${var.pod_name}-pod-setup.service",
+            "name": "${var.name}-pod-setup.service",
             "enabled": true,
             "contents": ${jsonencode(data.template_file.pod_service.rendered)}
           }
