@@ -1,5 +1,11 @@
 # https://docs.podman.io/en/latest/markdown/podman-pod-create.1.html
 
+variable "user" {
+  description = "User to execute the systemd unit under."
+  type = string
+  default = "core"
+}
+
 variable "add_hosts" {
   description = "Add a host to the /etc/hosts file shared between all containers in the pod."
   type = list(string)
@@ -78,6 +84,12 @@ variable "subuidname" {
   default = null
 }
 
+variable "hostname" {
+  description = "Name for UID map from the /etc/subuid file."
+  type = string
+  default = null
+}
+
 variable "infra" {
   description = "Create an infra container and associate it with the pod."
   type = string
@@ -128,6 +140,12 @@ variable "labels" {
 
 variable "label_file" {
   description = "Read in a line delimited file of labels."
+  type = string
+  default = null
+}
+
+variable "mac_address" {
+  description = "Pod network interface MAC address."
   type = string
   default = null
 }
