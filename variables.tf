@@ -189,7 +189,7 @@ variable "publish" {
   description = "List of ports or ranges of ports to publish from the pod to the host."
   type =list(object({
     host_port = number
-    container_port = number
+    pod_port = number
   }))
   default = []
 }

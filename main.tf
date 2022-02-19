@@ -93,7 +93,7 @@ data template_file "pod_service" {
       --pod-id-file ${var.pod_id_file} \
       %{~ endif ~}
       %{~ for port in var.publish ~}
-      --publish ${port.host_port}:${port.container_port} \
+      --publish ${port.host_port}:${port.pod_port} \
       %{~ endfor ~}
       %{~ if var.replace ~}
       --replace \
