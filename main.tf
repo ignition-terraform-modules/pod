@@ -93,7 +93,7 @@ data template_file "pod_service" {
       --pod-id-file ${var.pod_id_file} \
       %{~ endif ~}
       %{~ for port in var.publish ~}
-      --publish ${port} \
+      --publish ${port.host_port}:${port.container_port} \
       %{~ endfor ~}
       %{~ if var.replace ~}
       --replace \
@@ -113,8 +113,8 @@ data template_file "pod_service" {
       %{~ if var.userns != null ~}
       --userns ${var.userns} \
       %{~ endif ~}
-      %{~ for volume in var.volumes ~}
-      --volume ${volume} \
+      %{~ for volume_bind in var.volumes ~}
+      --volume ${volume_bind.host_dir}:${volume_bind.container_dir}%{ if volume_bind.options != null }:${volume_bind.options}%{ endif } \
       %{~ endfor ~}
       %{~ if var.volumes_from != null ~}
       --volumes-from ${var.volumes_from} \

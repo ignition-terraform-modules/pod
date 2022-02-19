@@ -187,7 +187,10 @@ variable "pod_id_file" {
 
 variable "publish" {
   description = "List of ports or ranges of ports to publish from the pod to the host."
-  type = list(string)
+  type =list(object({
+    host_port = number
+    container_port = number
+  }))
   default = []
 }
 
@@ -226,7 +229,11 @@ variable "userns" {
 
 variable "volumes" {
   description = "Create a bind mount."
-  type = list(string)
+  type = list(object({
+    host_dir = string
+    container_dir = string
+    options = optional(string)
+  }))
   default = []
 }
 
